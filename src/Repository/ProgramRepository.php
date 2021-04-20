@@ -10,7 +10,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Program|null find($id, $lockMode = null, $lockVersion = null)
  * @method Program|null findOneBy(array $criteria, array $orderBy = null)
  * @method Program[]    findAll()
+ * @method Program[]    findByCategory(int $categoryId)
  * @method Program[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+
  */
 class ProgramRepository extends ServiceEntityRepository
 {
@@ -22,19 +24,19 @@ class ProgramRepository extends ServiceEntityRepository
     // /**
     //  * @return Program[] Returns an array of Program objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByCategory($id) 
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.category_id = :category_id')
+            ->setParameter('category_id', $id)
             ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+  
 
     /*
     public function findOneBySomeField($value): ?Program
