@@ -17,14 +17,15 @@
     {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
+{% block navbar %}{% include '_navbar.html.twig' %}{% endblock %}
 {% block content %}{% endblock %}
 
 <body>
     {% block body %}{% endblock %}
-    <main>
+    {#<main>
         {% block navbar %}{% include '_navbar.html.twig' %}{% endblock %}
         
-    </main>
+    </main>#}
 
 <script src="/build/app.js"></script>
 </body>

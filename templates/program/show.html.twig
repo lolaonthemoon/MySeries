@@ -1,7 +1,25 @@
+{# templates/program/show.html.twig #}
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block title %}Série #{{ program.id }}{% endblock %}
 
-   <h1>numéro {{id}}</h1>
+{% block body %}
+<div class="media">
+
+
+  <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster" width="450" height="600" >
+
+  <div class="media-body">
+    <h1 class="mt-0">{{ program.title }}</h1>
+    <p>{{ program.summary }}</p>
+
+    <p>Catégorie : <a href="{{ path('category_show', { categoryName: program.category.name }) }}">{{ program.category.name }} </a></p>
+  </div>
+
+</div>
+
+
+<a href="{{ path('program_index') }}">
+    Programs List
+</a>
 
 {% endblock %}
-
