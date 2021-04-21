@@ -11,6 +11,16 @@
   <div class="media-body">
     <h1 class="mt-0">{{ program.title }}</h1>
     <p>{{ program.summary }}</p>
+  
+    {% for season  in seasons %}
+    <p><a href="{{ path('season_show', { categoryName: program.category.name }) }}">Saison  {{season.number}} - Année {{season.year}} </a>
+    </p>
+  </div>
+    <p> </p>
+    <p>{{season.description}} </p>
+  
+    {% endfor %}
+
 
     <p>Catégorie : <a href="{{ path('category_show', { categoryName: program.category.name }) }}">{{ program.category.name }} </a></p>
   </div>
