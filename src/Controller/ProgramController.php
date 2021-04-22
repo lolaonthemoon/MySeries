@@ -4,7 +4,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Episode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -54,22 +54,30 @@ class ProgramController extends AbstractController
             ->findOneBy(['id' => $id]);
 
 
+
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with id : ' . $id . ' found in program\'s table.'
             );
         }
-        $seasons = $program -> getSeasons();
-   
+
+        $seasons = $program->getSeasons();
+
+        if (!$seasons) {
+            throw $this->createNotFoundException(
+                'No season here...'
+            );
+        }
+
         return $this->render('program/show.html.twig', [
-            'program' => $program, 'seasons' => $seasons ,
+            'program' => $program, 'seasons' => $seasons,
         ]);
     }
 
     /**
-     * Getting a program by id
+     * Getting details for a season by season id and program id
      *
-     * @Route("/show/{programId<^[0-9]+$>}/seasons/{seasonId<^[0-9]+$>}", name="program_season_show")
+     * @Route("/{programId<^[0-9]+$>}/seasons/{seasonId<^[0-9]+$>}", name="season_show")
      * @return Response
      */
     public function showSeason(int $programId, int $seasonId): Response
@@ -78,20 +86,29 @@ class ProgramController extends AbstractController
             ->getRepository(Program::class)
             ->findOneBy(['id' => $programId]);
 
-      $season = $season -> getOneById ($seasonId);
+        $season = $this->getDoctrine()
+            ->getRepository(Season::class)
+            ->findOneBy(['id' => $seasonId]);
+
+        // code pas correct car l' id  n'est pas le bon
+        $episodes = $this->getDoctrine()
+            ->getRepository(Season::class)
+            ->findBy(['id' => $seasonId]);
 
 
-        if (!$program) {
+        if (!$program or !$season) {
             throw $this->createNotFoundException(
-                'No program with id : ' . $id . ' found in program\'s table.'
+                'Problème, Problème,.. avec un P majuscule'
             );
-        }
-      
-   
-        return $this->render('program/show.html.twig', [
-            'program' => $program, 'seasons' => $seasons ,
-        ]);
+        } elseif (!$episodes) {
+            throw $this->createNotFoundException(
+                'Pas d episode'
+            );
+        } else {
+            return $this->render('season/show.html.twig', [
+                'program' => $program, 'season' => $season, 'episodes' => $episodes,
+            ]);
+        } {
+        };
     }
-
-    
 }

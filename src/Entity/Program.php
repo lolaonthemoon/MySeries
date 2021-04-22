@@ -51,7 +51,7 @@ class Program
     private $year;
 
     /**
-     * @ORM\OneToMany(targetEntity=Season::class, mappedBy="Program")
+     * @ORM\OneToMany(targetEntity=Season::class, mappedBy="program")
      */
     private $seasons;
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EpisodeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,8 +36,10 @@ class Episode
 
     /**
      * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="episodes")
+     * @ORM\JoinColumn(nullable=false)
+ 
      */
-    private $Season;
+    private $season;
 
     public function getId(): ?int
     {
@@ -80,12 +84,12 @@ class Episode
 
     public function getSeason(): ?Season
     {
-        return $this->Season;
+        return $this->season;
     }
 
-    public function setSeason(?Season $Season): self
+    public function setSeason(?Season $season): self
     {
-        $this->Season = $Season;
+        $this->season = $season;
 
         return $this;
     }

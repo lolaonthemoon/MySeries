@@ -38,10 +38,10 @@ class Season
      * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="seasons")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Program;
+    private $program;
 
     /**
-     * @ORM\OneToMany(targetEntity=Episode::class, mappedBy="Season")
+     * @ORM\OneToMany(targetEntity=Episode::class, mappedBy="season")
      */
     private $episodes;
 
@@ -93,7 +93,7 @@ class Season
 
     public function getProgram(): ?Program
     {
-        return $this->Program;
+        return $this->program;
     }
 
     public function setProgram(?Program $Program): self
