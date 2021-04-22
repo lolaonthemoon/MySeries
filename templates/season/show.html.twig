@@ -14,9 +14,13 @@
   {% for episode in season.episodes %}
   <p>#  {{episode.number}} - {{episode.title}}</p>
   <p>#  {{episode.synopsis}} </p>
-  {% endfor %}
+ 
 
-  <a href="{{ path('program_show', { id: program.id }) }}">Back </a>
+  <p><a href="{{ path('program_episode_show', { program: program.id , season: season.id , episode: episode.id}) }}">Episode # {{episode.number}} -{{episode.title}} </a>
+  {% endfor %}
+  </p>
+
+  <a href="{{ path('program_show', { program: program.id }) }}">Back </a>
 
 </div>
 
