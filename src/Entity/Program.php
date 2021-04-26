@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 // DON'T forget the following use statement!!!
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
@@ -188,7 +189,7 @@ class Program
             'fields' => 'title',
             'errorPath' => 'port',
             'message' => 'Ce titre existe déja, try again !...',
-        ]));       
+        ]));
     }
 
     /**
@@ -217,4 +218,23 @@ class Program
 
         return $this;
     }
+
+
+    // addition to basic entity => multiple actors in
+    // a program
+    public function addMultipleActors(Actor $actor)
+    {
+        if ($this->actors->contains($actor)) {
+            return;
+        }
+        $this->actors[] = $actor;
+    }
+
+    public function removeMultipleActors(Actor $actor)
+    {
+        if ($this->actors->removeElement($actor)) {
+            return;
+        }
+    }
+    // end Multiple Actors add on
 }
