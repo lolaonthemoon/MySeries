@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actors index{% endblock %}
+
+
+{% block body %}
+<h1>All Actors index</h1>
+<a href="{{ path('actor_new') }}">Create new</a>
+
+{% for actor in actors %}
+
+<h2>    
+    <a href="{{ path('actor_show', {'actor': actor.id}) }}">{{ actor.firstname }}</a>
+</h2>
+
+{% for program in actor.programs %}
+<div> 
+<a href="{{ path('program_show', {'program': program.id}) }}">{{ program.title}}</a>
+</div>
+{% else %}
+<li>Aucune série pour cet acteur</li>
+{% endfor %}
+<br>
+{% else %}
+
+<a>colspan="4">no records found</a>
+
+{% endfor %}
+
+
+
+{% endblock %}

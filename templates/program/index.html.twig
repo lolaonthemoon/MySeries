@@ -4,23 +4,38 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
-    <h1>Toutes les séries : </h1>
-
-    {% for program in programs %}
-    <div>
-        <h2>{{ loop.index }} / {{ program.title }} -- {{ program.category.name }}</h2>
-        <p>{{ program.summary }}</p>
-        {# Lien vers les saisons #}
-        <a href="{{ path("program_show", { "program": program.id }) }}">Toutes les saisons</a>
-
-    </div>
-    {% else %}
-        Aucune série trouvée.
-    {% endfor %}
+<h1>All programs index</h1>
+<a href="{{ path("program_new")}}">Create new</a>
 
 
-    <a href="{{ path('app_index') }}">
-        Back
-    </a>
+{% for program in programs %}
+<div>
+    <h2>{{ loop.index }} / {{ program.title }} -- {{ program.category.name }}</h2>
+    <p>{{ program.summary }}</p>
+    {# Lien vers les saisons #}
+
+    <strong>Acteurs :</strong>
+    <ul>
+        {% for actor in program.actors %}
+        <div>
+            <a href="{{ path('actor_show', {'actor': actor.id}) }}">{{ actor.firstname}}</a>
+        </div>
+
+        {% else %}
+        <li>Aucun acteur pour cette série</li>
+        {% endfor %}
+
+    </ul>
+    <a href="{{ path("program_show", { "program" : program.id }) }}">Toutes les saisons</a>
+
+</div>
+{% else %}
+Aucune série trouvée.
+{% endfor %}
+
+
+<a href="{{ path('app_index') }}">
+    Back
+</a>
 
 {% endblock %}
