@@ -23,8 +23,13 @@
                 <th>Description</th>
                 <td>{{ season.description }}</td>
             </tr>
+            {# {{{% for episode in season.episodes %}
+                 <div>{{episode.number}}- {{episode.title}}</div>
+            {% endfor %}}} #}
+         
         </tbody>
     </table>
+
 
     <a href="{{ path('season_index') }}">back to list</a>
 
