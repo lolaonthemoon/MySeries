@@ -4,8 +4,12 @@
 
 {% block body %}
 <h1> Saison # {{season.number}}</h1>
-<p> Episode # {{episode.number}} -> {{episode.title}}</p>
+{% for episode in season.episodes %}
+  <p> Episode # {{episode.number}} -> {{episode.title}}</p>
   <p> Année {{episode.synopsis}}</p>
+{% endfor %}
+
+
 
 <div class="media">
 

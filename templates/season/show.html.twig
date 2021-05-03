@@ -1,39 +1,28 @@
+{# templates/season/show.html.twig #}
 {% extends 'base.html.twig' %}
-
-{% block title %}Season{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Season</h1>
+{# <h1>Serie {{program.title}} -> Saison # {{season.number}}</h1> #}
+<h1>Saison # {{season.number}}</h1>
+<div class="media">
+  <p> Année {{season.year}}</p>
+  <div class="media-body">
+    <p>{{season.description}}</p>
+  </div> 
+  <p>Liste des épisodes</p>
+  {% for episode in season.episodes %}
+  <p>#  {{episode.number}} - {{episode.title}}</p>
+  <p>#  {{episode.synopsis}} </p>
+ 
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ season.id }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ season.number }}</td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>{{ season.year }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ season.description }}</td>
-            </tr>
-            {# {{{% for episode in season.episodes %}
-                 <div>{{episode.number}}- {{episode.title}}</div>
-            {% endfor %}}} #}
-         
-        </tbody>
-    </table>
+  <p><a href="{{ path('program_episode_show', { program: program.id , season: season.id , episode: episode.id}) }}">Episode # {{episode.number}} -{{episode.title}} </a>
+  {% endfor %}
+  </p>
+
+  <a href="{{ path('program_show', { program: program.id }) }}">Back </a>
+
+</div>
 
 
-    <a href="{{ path('season_index') }}">back to list</a>
-
-    <a href="{{ path('season_edit', {'id': season.id}) }}">edit</a>
-
-    {{ include('season/_delete_form.html.twig') }}
 {% endblock %}

@@ -3,32 +3,34 @@
 {% block title %}Episode{% endblock %}
 
 {% block body %}
-    <h1>Episode</h1>
+<h1>Episode</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ episode.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ episode.title }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ episode.number }}</td>
-            </tr>
-            <tr>
-                <th>Synopsis</th>
-                <td>{{ episode.synopsis }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table">
+    <tbody>
+        <th>Number -> {{ episode.number }} : {{ episode.title }}</th>
 
-    <a href="{{ path('episode_index') }}">back to list</a>
+        <tr>
+            <th>Synopsis</th>
+            <td>{{ episode.synopsis }}</td>
+        </tr>
 
-    <a href="{{ path('episode_edit', {'id': episode.id}) }}">edit</a>
+    </tbody>
+</table>
 
-    {{ include('episode/_delete_form.html.twig') }}
+{% for comment in episode.comments %}
+<div> Rate : {{comment.rate }}
+    <ul>{{comment.id }} -> {{comment.comment}}</ul>
+</div>
+{% endfor %}
+
+<a href="{{ path('episode_index') }}">back to list</a>
+<a href="{{ path('episode_edit', {'id': episode.id}) }}">edit</a>
+
+{# Comment the episode only for a logged in user #}
+{% if app.user %}
+<a href="{{ path('comment_new',{'episode': episode.id} )}}">add comment</a>
+{% endif %}
+
+
+{{ include('episode/_delete_form.html.twig') }}
 {% endblock %}

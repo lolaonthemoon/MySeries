@@ -14,7 +14,7 @@
  
     {% for season  in seasons %}
 
-    <p><a href="{{ path('program_season_show', { program: program.id , season: season.id}) }}">Saison  {{season.number}} - Année {{season.year}} </a>
+    <p><a href="{{ path('season_show', {season: season.id}) }}">Saison  {{season.number}} - Année {{season.year}} </a>
  
     </p>
   </div>
